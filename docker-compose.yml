@@ -8,11 +8,8 @@ services:
       - "8000:8000"
     volumes:
       - ./service:/service
-    environment:
-      - DB_HOST=database
-      - DB_NAME=dbname
-      - DB_USER=dbuser
-      - DB_PASSWORD=pass
+    env_file:
+      - .env
 
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
@@ -22,7 +19,5 @@ services:
 
   database:
     image: postgres:14.6-alpine
-    environment:
-      - POSTGRES_DB=dbname
-      - POSTGRES_USER=dbuser
-      - POSTGRES_PASSWORD=pass
+    env_file:
+      - .env
